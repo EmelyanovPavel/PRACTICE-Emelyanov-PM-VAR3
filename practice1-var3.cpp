@@ -26,17 +26,17 @@
 //
 //4. Complete the task according to the option.
 
-// Интерфейс контейнера Container interface
+// Container interface
 class IContainer 
 {
 public:
     virtual void add(const void* data) = 0;
     virtual void remove() = 0;
     virtual bool isEmpty() const = 0;
-    virtual ~IContainer() {} // Виртуальный деструктор Virtual destructor
+    virtual ~IContainer() {} // Virtual destructor
 };
 
-// Узел двусвязного списка A node of a doubly linked list
+// A node of a doubly linked list
 template<typename T>
 struct Node 
 {
@@ -48,7 +48,7 @@ struct Node
     ~Node() {}
 };
 
-// Двусвязный список The doubly-linked list
+//The doubly-linked list
 template<typename T>
 class DoublyLinkedList : public IContainer 
 {
@@ -65,7 +65,7 @@ public:
         clear();
     }
 
-    // Добавление элемента в конец списка Adding an element to the list end
+    // Adding an element to the list end
     void add(const void* data) override 
     {
         Node<T>* newNode = new Node<T>(*(T*)data);
@@ -83,7 +83,7 @@ public:
         size++;
     }
 
-    // Удаление первого элемента Deleting the first element
+    //  Deleting the first element
     void remove() override 
     {
         if (!isEmpty()) 
@@ -103,13 +103,13 @@ public:
         }
     }
 
-    // Проверка на пустоту Checking for emptiness
+    // Checking for emptiness
     bool isEmpty() const override 
     {
         return size == 0;
     }
 
-    // Очистка списка Clearing the list
+    // Clearing the list
     void clear() 
     {
         while (!isEmpty()) 
@@ -118,13 +118,13 @@ public:
         }
     }
 
-    // Размер списка List size
+    // List size
     size_t getSize() const 
     {
         return size;
     }
 
-    // Копирование списка Copying the list
+    // Copying the list
     DoublyLinkedList(const DoublyLinkedList& other) 
     {
         *this = other;
@@ -145,7 +145,7 @@ public:
         return *this;
     }
 
-    // Методы для доступа к данным Methods for accessing data
+    //Methods for accessing data
     Node<T>* getHead() const 
     {
         return head;
@@ -156,7 +156,7 @@ public:
     }
 };
 
-// Класс Очередь на основе двусвязного списка Queue class based on a doubly linked list
+// Queue class based on a doubly linked list
 template<typename T>
 
 class Queue 
@@ -169,13 +169,13 @@ public:
 
     ~Queue() {}
 
-    // Добавление элемента в очередь Adding an element to the queue
+    // Adding an element to the queue
     void enqueue(const T& data) 
     {
         list.add(&data);
     }
 
-    // Извлечение элемента из очереди Removing an element from the queue
+    // Removing an element from the queue
     T dequeue() 
     {
 
@@ -189,36 +189,36 @@ public:
         return data;
     }
 
-    // Проверка на пустоту Checking for emptiness
+    // Checking for emptiness
     bool isEmpty() const 
     {
         return list.isEmpty();
     }
 
-    // Размер очереди List size
+    // List size
     size_t size() const 
     {
         return list.getSize();
     }
 };
 
-// Пример использования Usage example
+// Usage example
 void task1() 
 {
     Queue<int> queue;
 
-    //проверка очереди на пустоту Checking for emptiness
+    // Checking for emptiness
     if (queue.isEmpty())
     {
         std::cout << "The queue is empty" << std::endl;
     }
 
-    //добавление элементов Adding an elements
+    // Adding an elements
     queue.enqueue(1);
     queue.enqueue(2);
     queue.enqueue(3);
 
-    //выводим элементы displaying the elements
+    // displaying the elements
     try 
     {
         while (!queue.isEmpty()) 
@@ -249,17 +249,17 @@ void task1()
 
 void task2()
 {
-    std::ifstream file("chars.txt"); // открываем файл для чтения
+    std::ifstream file("chars.txt"); // opening the file for reading
 
     if (!file.is_open()) {
         std::cerr << "Opening error" << std::endl;
     }
 
-    // Создаем две очереди: для цифр и для остальных символов
+    // creating two queues: for numbers and for other characters.
     std::queue<char> digits;
     std::queue<char> others;
 
-    //проверка очередей на пустоту
+    //checking queues for emptiness
     if (digits.empty())
     {
         std::cout << "The 'digits' queue is empty" << std::endl;
@@ -270,33 +270,34 @@ void task2()
         std::cout << "The 'others' queue is empty" << std::endl;
     }
 
-    // Читаем файл символ за символом
+    // Reading the file character by character
     char ch;
     while (file.get(ch)) 
     {
-        if (isdigit(ch)) { // если символ цифра
+        if (isdigit(ch)) { // if the character is a number
             digits.push(ch);
         }
-        else { // если символ не цифра
+        else { // if the character is not a number
             others.push(ch);
         }
     }
 
-    // Выводим символы, отличные от цифр
+    // Outputting characters other than numbers
+
     while (!others.empty()) 
     {
         std::cout << others.front();
         others.pop();
     }
 
-    // Выводим цифры
+    // Outputting the numbers
     while (!digits.empty()) 
     {
         std::cout << digits.front();
         digits.pop();
     }
 
-    file.close(); // закрываем файл
+    file.close(); // closing the file
 }
 
 int main()
