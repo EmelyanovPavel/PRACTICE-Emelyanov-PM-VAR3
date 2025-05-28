@@ -1,48 +1,48 @@
 #include "classIContainer.h"
+#include "classDoublyLinkedList.h"
 
 #ifndef CLASS_Queue
 #define CLASS_Queue
 
-// Queue class based on a doubly linked list
+// Queue class based on a container interface
 template<typename T>
 
-class Queue
+class Queue : public IContainer
 {
 private:
-    DoublyLinkedList<T> list;
+    DoublyLinkedList<void*> list;
 
 public:
+    Queue() {}
 
-    // Adding an element to the queue
-    void enqueue(const T& data)
-    {
+    // Adding an element to the list end
+    void add(const void* data) override {
         list.add(&data);
     }
 
-    // Removing an element from the queue
-    T dequeue()
-    {
-
-        if (list.isEmpty())
-        {
-            throw std::runtime_error("The queue is empty");
-        }
-
-        T data = list.getFirstData();
+    //  Deleting the first element
+    void remove() override {
         list.remove();
-        return data;
     }
 
     // Checking for emptiness
-    bool isEmpty() const
-    {
+    bool isEmpty() const override {
         return list.isEmpty();
     }
 
-    // List size
-    size_t size() const
-    {
+    //Getting the first element
+    void* front() const {
+        if (!isEmpty()) {
+            return *(void**)list.getFirstData();
+        }
+        throw std::runtime_error("The list is empty");
+    }
+
+    //The queue size
+    size_t size() const {
         return list.getSize();
     }
+
 };
+
 #endif
