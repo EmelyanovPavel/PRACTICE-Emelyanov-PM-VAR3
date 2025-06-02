@@ -1,3 +1,5 @@
+#include "classIContainer.h"
+
 #ifndef CLASS_DoublyLinkedList
 #define CLASS_DoublyLinkedList
 
@@ -28,7 +30,7 @@ public:
     }
 
     // Adding an element to the queue
-    void add(const void* data) {
+    void add (const T& data) {
         Node<T>* newNode = new Node<T>(*(T*)data);
 
         if (isEmpty()) {
