@@ -4,10 +4,10 @@
 #ifndef CLASS_Queue
 #define CLASS_Queue
 
-// Queue class based on a container interface
+// Queue class based on a doubly-linked list
 template<typename T>
 
-class Queue : public IContainer
+class Queue
 {
 private:
     DoublyLinkedList<void*> list;
@@ -16,17 +16,17 @@ public:
     Queue() {}
 
     // Adding an element to the list end
-    void add(const void* data) override {
+    void add(const void* data) {
         list.add(&data);
     }
 
     //  Deleting the first element
-    void remove() override {
+    void remove() {
         list.remove();
     }
 
     // Checking for emptiness
-    bool isEmpty() const override {
+    bool isEmpty() const {
         return list.isEmpty();
     }
 
@@ -44,5 +44,4 @@ public:
     }
 
 };
-
 #endif
