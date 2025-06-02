@@ -11,13 +11,9 @@ void output()
 {
     Queue<int> queue;
 
-    int a = 10;
-    int b = 20;
-    int c = 30;
-
-    queue.add(&a);
-    queue.add(&b);
-    queue.add(&c);
+    queue.add(1);
+    queue.add(2);
+    queue.add(3);
 
     try {
         while (!queue.isEmpty()) {
