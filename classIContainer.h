@@ -1,7 +1,5 @@
-#include "classDoublyLinkedList.h"
-
-#ifndef CLASS_IContainer_H_
-#define CLASS_IContainer_H_
+#ifndef CLASS_IContainer
+#define CLASS_IContainer
 
 //// Container interface 
 class IContainer {
