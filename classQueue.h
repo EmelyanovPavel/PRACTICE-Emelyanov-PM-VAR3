@@ -1,32 +1,32 @@
-#include "classIContainer.h"
-#include "classDoublyLinkedList.h"
+#ifndef CLASSQUEUE_H
+#define CLASSQUEUE_H
 
-#ifndef CLASS_Queue
-#define CLASS_Queue
+#include "classDoublyLinkedList.h"
+#include "classIContainer.h"
 
 // Queue class based on a doubly-linked list
-template<typename T>
-
-class Queue
+class Queue: public IContainer 
 {
+    //implementation
 private:
     DoublyLinkedList<void*> list;
 
 public:
     Queue() {}
+    ~Queue() override {}
 
     // Adding an element to the list end
-    void add(const void* data) {
+    void addElement(const void* data) override {
         list.add(&data);
     }
 
     //  Deleting the first element
-    void remove() {
+    void removeElement() override {
         list.remove();
     }
 
     // Checking for emptiness
-    bool isEmpty() const {
+    bool isEmpty() const override {
         return list.isEmpty();
     }
 
@@ -44,4 +44,4 @@ public:
     }
 
 };
-#endif
+#endif //CLASSQUEUE_H
