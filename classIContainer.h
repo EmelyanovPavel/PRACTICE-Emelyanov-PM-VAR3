@@ -1,5 +1,5 @@
-#ifndef CLASS_IContainer
-#define CLASS_IContainer
+#ifndef CLASSICONTAINER_H_
+#define CLASSICONTAINER_H_
 
 //// Container interface 
 class IContainer {
@@ -9,4 +9,4 @@ public:
     virtual bool isEmpty() const = 0;
     virtual ~IContainer() {} // Virtual destructor
 };
-#endif
+#endif //CLASSICONTAINER_H_
