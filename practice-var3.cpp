@@ -1,31 +1,29 @@
 ////Practice
-#include <iostream>
-#include <queue> 
-#include <fstream>
-#include <string>
-#include <stdexcept>
 #include "classQueue.h"
-#include "classIContainer.h"
 
 void output()
 {
-    Queue<int> queue;
+   Queue<int> queue;
 
-    queue.add(1);
-    queue.add(2);
-    queue.add(3);
+   int a = 1;
+   int b = 2;
+   int c = 3;
 
-    try {
-        while (!queue.isEmpty()) {
-            int* value = (int*)queue.front();
-            std::cout << *value << " ";
-            queue.remove();
-        }
-    }
+   queue.addElement(&a);
+   queue.addElement(&b);
+   queue.addElement(&c);
 
-    catch (const std::runtime_error& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
+   try {
+       while (!queue.isEmpty()) {
+           int* value = (int*)queue.front();
+           std::cout << *value << " ";
+           queue.removeElement();
+       }
+   }
+
+   catch (const std::runtime_error& e) {
+       std::cerr << "Error: " << e.what() << std::endl;
+   }
 }
 
 //Tasks.
@@ -33,6 +31,11 @@ void output()
 //A text file is given.In one file view, print the file elements in
 //the following order : first, all characters other than digits, and then all digits,
 //maintaining the original order in each character group.
+
+#include <queue> 
+#include <fstream>
+#include <string>
+
 void print()
 {
     std::ifstream file("chars.txt"); // opening the file for reading
