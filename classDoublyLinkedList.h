@@ -1,7 +1,8 @@
-#include "classIContainer.h"
+#ifndef CLASSDOUBLYLINKEDLIST_H_
+#define CLASSDOUBLYLINKEDLIST_H_
 
-#ifndef CLASS_DoublyLinkedList
-#define CLASS_DoublyLinkedList
+#include <iostream>
+#include <stdexcept>
 
 //The list node
 template<typename T>
@@ -23,9 +24,23 @@ private:
     size_t size;
 
 public:
-    DoublyLinkedList() : head(nullptr), tail(nullptr), size(0) {}
+    DoublyLinkedList()
+    {
+        std::cout << "Default Constructor" << std::endl;
+        head = nullptr;
+        tail = nullptr;
+        size = 0;
+    }
+
+    DoublyLinkedList(Node<T>* head, Node<T>* tail, size_t size)
+    {
+        std::cout << "Parametrized Constructor" << std::endl;
+        this->head = head;
+        this->tail = tail;
+    }
 
     ~DoublyLinkedList() {
+        std::cout << "Destructor" << std::endl;
         clear();
     }
 
@@ -80,11 +95,14 @@ public:
     // Copying the list
     DoublyLinkedList(const DoublyLinkedList& other)
     {
+        std::cout << "Copying Constructor" << std::endl;
         *this = other;
     }
 
     DoublyLinkedList& operator=(const DoublyLinkedList& other)
     {
+        std::cout << "Copy assignment operator" << std::endl;
+
         if (this != &other)
         {
             clear();
@@ -113,4 +131,4 @@ public:
         throw std::runtime_error("The list is size");
     }
 };
-#endif
+#endif //CLASSDOUBLYLINKEDLIST_H_
