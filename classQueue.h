@@ -1,5 +1,5 @@
-#ifndef CLASSQUEUE_H
-#define CLASSQUEUE_H
+#ifndef CLASSQUEUE_H_
+#define CLASSQUEUE_H_
 
 #include "classDoublyLinkedList.h"
 #include "classIContainer.h"
@@ -44,4 +44,4 @@ public:
     }
 
 };
-#endif //CLASSQUEUE_H
+#endif //CLASSQUEUE_H_
