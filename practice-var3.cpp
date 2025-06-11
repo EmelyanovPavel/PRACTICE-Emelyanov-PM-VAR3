@@ -3,27 +3,27 @@
 
 void output()
 {
-   Queue<int> queue;
+    Queue<int> queue;
 
-   int a = 1;
-   int b = 2;
-   int c = 3;
+    std::cout << "I'm queue" << std::endl;
 
-   queue.addElement(&a);
-   queue.addElement(&b);
-   queue.addElement(&c);
+    std::cout << "Adding elements..." << std::endl;
+    queue.add(1);
+    queue.add(2);
+    queue.add(3);
 
-   try {
-       while (!queue.isEmpty()) {
-           int* value = (int*)queue.front();
-           std::cout << *value << " ";
-           queue.removeElement();
-       }
-   }
-
-   catch (const std::runtime_error& e) {
-       std::cerr << "Error: " << e.what() << std::endl;
-   }
+    try {
+        std::cout << "Removing elements..." << std::endl;
+        while (!queue.isEmpty()) {
+            std::cout << queue.front() << " ";
+            queue.remove();
+        }
+    }
+    
+    catch (const std::runtime_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 //Tasks.
