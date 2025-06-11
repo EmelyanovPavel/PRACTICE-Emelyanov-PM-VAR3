@@ -5,43 +5,50 @@
 #include "classIContainer.h"
 
 // Queue class based on a doubly-linked list
-class Queue: public IContainer 
+template<typename T>
+class Queue: public IContainer<T> 
 {
     //implementation
 private:
-    DoublyLinkedList<void*> list;
+    DoublyLinkedList<T> list;
 
 public:
-    Queue() {}
-    ~Queue() override {}
 
     // Adding an element to the list end
-    void addElement(const void* data) override {
-        list.add(&data);
+    void add(const T& data) override {
+        list.push_back(data);
     }
 
     //  Deleting the first element
-    void removeElement() override {
-        list.remove();
+    void remove() override {
+        if (!list.empty()) {
+            list.pop_front();
+        }
     }
 
     // Checking for emptiness
     bool isEmpty() const override {
-        return list.isEmpty();
+        return list.empty();
     }
 
     //Getting the first element
-    void* front() const {
-        if (!isEmpty()) {
-            return *(void**)list.getFirstData();
+    T front() const {
+        if (!list.empty()) {
+            return list.getFront();
         }
-        throw std::runtime_error("The list is empty");
+        throw std::out_of_range("Queue is empty");
+    }
+
+    T back() const {
+        if (!list.empty()) {
+            return list.getBack();
+        }
+        throw std::out_of_range("Queue is empty");
     }
 
     //The queue size
     size_t size() const {
         return list.getSize();
     }
-
 };
 #endif //CLASSQUEUE_H_
