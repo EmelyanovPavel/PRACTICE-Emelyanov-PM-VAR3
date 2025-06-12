@@ -36,45 +36,67 @@ public:
 
     void push_back(const T& data) {
         Node* newNode = new Node(data, tail, nullptr);
-        if (tail) tail->next = newNode;
-        else head = newNode;
+        if (tail != nullptr) {
+            tail->next = newNode;
+        }
+        if (head == nullptr) {
+            head = newNode;
+        }
         tail = newNode;
         size++;
     }
 
     void push_front(const T& data) {
         Node* newNode = new Node(data, nullptr, head);
-        if (head) head->prev = newNode;
-        else tail = newNode;
+        if (head != nullptr) {
+            head->prev = newNode;
+        }
+        if (tail == nullptr) {
+            tail = newNode;
+        }
         head = newNode;
         size++;
     }
 
     void pop_back() {
-        if (tail) {
+        if (tail != nullptr) {
             Node* temp = tail;
-            tail = tail->prev;
-            if (tail) tail->next = nullptr;
-            else head = nullptr;
+            if (tail->prev != nullptr) {
+                tail = tail->prev;
+                tail->next = nullptr;
+            }
+            else {
+                head = nullptr;
+                tail = nullptr;
+            }
             delete temp;
             size--;
         }
     }
 
     void pop_front() {
-        if (head) {
+        if (head != nullptr) {
             Node* temp = head;
-            head = head->next;
-            if (head) head->prev = nullptr;
-            else tail = nullptr;
+            if (head->next != nullptr) {
+                head = head->next;
+                head->prev = nullptr;
+            }
+            else {
+                head = nullptr;
+                tail = nullptr;
+            }
             delete temp;
             size--;
         }
     }
 
-    bool empty() const { return size == 0; }
+    bool empty() const { 
+        return size == 0; 
+    }
 
-    size_t getSize() const { return size; }
+    size_t getSize() const { 
+        return size; 
+    }
 
     void clear() {
         while (!empty()) {
@@ -86,7 +108,7 @@ public:
     DoublyLinkedList(const DoublyLinkedList& other) : head(nullptr), tail(nullptr), size(0) {
         std::cout << "Copying Constructor!" << std::endl;
         Node* current = other.head;
-        while (current) {
+        while (current != nullptr) {
             push_back(current->data);
             current = current->next;
         }
@@ -98,7 +120,7 @@ public:
         if (this != &other) {
             clear();
             Node* current = other.head;
-            while (current) {
+            while (current != nullptr) {
                 push_back(current->data);
                 current = current->next;
             }
@@ -106,6 +128,27 @@ public:
         return *this;
     }
 
+    //The equality comparison operator
+    bool operator==(const DoublyLinkedList& other) const {
+        if (size != other.size) {
+            return false;
+        }
+        Node* current1 = head;
+        Node* current2 = other.head;
+        while (current1 != nullptr && current2 != nullptr) {
+            if (current1->data != current2->data) {
+                return false;
+            }
+            current1 = current1->next;
+            current2 = current2->next;
+        }
+        return true;
+    }
+
+    //The inequality operator
+    bool operator!=(const DoublyLinkedList& other) const {
+        return !(*this == other);
+    }
     //Methods for accessing data
     T getFront() const {
         if (!empty()) {
