@@ -154,14 +154,14 @@ public:
         if (!empty()) {
             return head->data;
         }
-        throw std::runtime_error("The list is size");
+        throw std::runtime_error("The list is empty");
     }
 
     T getBack() const {
         if (!empty()) {
             return tail->data;
         }
-        throw std::runtime_error("The list is size");
+        throw std::runtime_error("The list is empty");
     }
 };
 #endif //CLASSDOUBLYLINKEDLIST_H_
